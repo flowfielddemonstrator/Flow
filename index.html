@@ -1,14 +1,14 @@
 <html>
     <head>
         <title>Flow Field Dashboard</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="static/css/style.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 
     </head>
     <body>
         <div class="banner">
             <div class="navbar">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" width="200" height="100">
+                <img src="static/images/logo.png" alt="logo" width="200" height="100">
                 <span class="navbar-title"> Current and Temperature Distribution</span>
                 <ul>
                     <li><a href="#">Pause</a></li>
@@ -137,11 +137,13 @@
     </div>
 
     
-    <script src="{{ url_for('static', filename='js/adcvalues.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{ url_for('static', filename='js/changecolors.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/newscript.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/table.js') }}"></script>
+    <script src="static/js/adcvalues.js"></script>
+    <script src="static/js/changecolors.js"></script>
+    <script src="static/js/newscript.js"></script>
+    <script src="static/js/plotchart.js"></script>
+    <script src="static/js/tempchart.js"></script>
+    <script src="static/js/table.js"></script>
+
 
 
 
