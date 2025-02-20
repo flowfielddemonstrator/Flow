@@ -8,11 +8,12 @@ function updateTableValues() {
     ];
 
     const temperatureValues = [
-        (parseFloat(document.getElementById("adc4").innerText) || 0)
-        (parseFloat(document.getElementById("adc5").innerText) || 0)
-        (parseFloat(document.getElementById("adc6").innerText) || 0)
-        (parseFloat(document.getElementById("adc7").innerText) || 0)
+        parseFloat(document.getElementById("adc4").innerText) || 0,
+        parseFloat(document.getElementById("adc5").innerText) || 0,
+        parseFloat(document.getElementById("adc6").innerText) || 0,
+        parseFloat(document.getElementById("adc7").innerText) || 0
     ];
+
 
     // Update table cells with scaled values and units
     document.getElementById("adc0").innerText = currentValues[0].toFixed(2) + " A";
