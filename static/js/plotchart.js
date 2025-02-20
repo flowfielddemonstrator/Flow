@@ -6,7 +6,16 @@ function getAdcValueById(id) {
   
   // Initialize Current Chart mit den ADC 0-3 Werten aus der Tabelle
   function populateCurrentChart() {
+    console.log("Initializing Current Chart...");
+    
     const ctx = document.getElementById('currentchart');
+    if (!ctx) {
+        console.error("ERROR: currentchart canvas element not found!");
+        return;
+    }
+
+    console.log("Canvas found, creating chart...");
+
     new Chart(ctx, {
         type: 'line',
         data: {
@@ -46,6 +55,7 @@ function getAdcValueById(id) {
             }
         }
     });
+      console.log("Current Chart created successfully!");
 }
 
   
