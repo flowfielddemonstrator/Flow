@@ -1,11 +1,14 @@
+// Declare global variables to hold chart instances
+let currentChartInstance = null;
+let tempChartInstance = null;
+
 // Function to get ADC values from global variables instead of HTML
 function getAdcValueById(id) {
     return window[id] !== undefined ? window[id] : 0;  // Return the global variable if it exists, otherwise return 0
 }
 
-  
-  // Initialize Current Chart mit den ADC 0-3 Werten aus der Tabelle
-  function populateCurrentChart() {
+// Initialize Current Chart using ADC 0-3 values
+function populateCurrentChart() {
     console.log("Initializing Current Chart...");
     
     const ctx = document.getElementById('currentchart');
@@ -16,7 +19,12 @@ function getAdcValueById(id) {
       
     console.log("Canvas found, creating chart...");
 
-    new Chart(ctx, {
+    // If an instance already exists, destroy it before creating a new one
+    if (currentChartInstance) {
+        currentChartInstance.destroy();
+    }
+    
+    currentChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
             labels: Array(4).fill(0),  // Placeholder labels for now
@@ -55,20 +63,23 @@ function getAdcValueById(id) {
             }
         }
     });
-      console.log("Current Chart created successfully!");
+    console.log("Current Chart created successfully!");
 }
 
-  
-  // Initialize Temperature Chart mit den ADC 4-7 Werten aus der Tabelle
-  function populateTempChart() {
+// Initialize Temperature Chart using ADC 4-7 values
+function populateTempChart() {
     const ctx2 = document.getElementById('tempchart');
-
-      // If a chart already exists on this canvas, destroy it
+    if (!ctx2) {
+        console.error("ERROR: tempchart canvas element not found!");
+        return;
+    }
+      
+    // If an instance already exists, destroy it before creating a new one
     if (tempChartInstance) {
         tempChartInstance.destroy();
     }
-      
-    new Chart(ctx2, {
+    
+    tempChartInstance = new Chart(ctx2, {
         type: 'line',
         data: {
             labels: Array(4).fill(0),  // Placeholder labels for now
@@ -109,33 +120,31 @@ function getAdcValueById(id) {
     });
 }
 
-  
-  // Populate the table and initialize both charts once when the page loads
-  populateCurrentChart();
-  populateTempChart();
+// Populate the table and initialize both charts once when the page loads
+populateCurrentChart();
+populateTempChart();
 
+// Function to update charts with new data
 function updateCharts() {
     const adcValues = [
         getAdcValueById("adc0"), getAdcValueById("adc1"), getAdcValueById("adc2"), getAdcValueById("adc3"),
         getAdcValueById("adc4"), getAdcValueById("adc5"), getAdcValueById("adc6"), getAdcValueById("adc7")
     ];
     
-    const currentChart = Chart.getChart("currentchart");
-    const tempChart = Chart.getChart("tempchart");
-
-    if (currentChart && tempChart) {
-        currentChart.data.datasets.forEach((dataset, i) => {
+    // Instead of getting the chart via Chart.getChart(), use our stored instances
+    if (currentChartInstance && tempChartInstance) {
+        currentChartInstance.data.datasets.forEach((dataset, i) => {
             dataset.data.push(adcValues[i]);  // Append new ADC values
             if (dataset.data.length > 50) dataset.data.shift();  // Keep data size reasonable
         });
 
-        tempChart.data.datasets.forEach((dataset, i) => {
+        tempChartInstance.data.datasets.forEach((dataset, i) => {
             dataset.data.push(adcValues[i + 4]);  // Append temperature ADC values
             if (dataset.data.length > 50) dataset.data.shift();
         });
 
-        currentChart.update();
-        tempChart.update();
+        currentChartInstance.update();
+        tempChartInstance.update();
     }
 }
 
