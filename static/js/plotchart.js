@@ -13,13 +13,7 @@ function getAdcValueById(id) {
         console.error("ERROR: currentchart canvas element not found!");
         return;
     }
-
-    // Destroy existing chart before creating a new one
-    if (Chart.getChart("currentchart")) {
-        console.log("Destroying existing Current Chart...");
-        Chart.getChart("currentchart").destroy();
-    }  
-
+      
     console.log("Canvas found, creating chart...");
 
     new Chart(ctx, {
