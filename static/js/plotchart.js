@@ -62,6 +62,12 @@ function getAdcValueById(id) {
   // Initialize Temperature Chart mit den ADC 4-7 Werten aus der Tabelle
   function populateTempChart() {
     const ctx2 = document.getElementById('tempchart');
+
+      // If a chart already exists on this canvas, destroy it
+    if (tempChartInstance) {
+        tempChartInstance.destroy();
+    }
+      
     new Chart(ctx2, {
         type: 'line',
         data: {
