@@ -37,7 +37,6 @@ function populateCurrentChart() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
             plugins: {
                 title: {
                     display: true,
@@ -93,7 +92,6 @@ function populateTempChart() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
             plugins: {
                 title: {
                     display: true,
