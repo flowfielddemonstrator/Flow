@@ -8,13 +8,10 @@ setInterval(async () => {
 
     // Loop through ADC values and update the webpage
     for (let i = 0; i < 8; i++) {
-      const adcElement = document.getElementById(`adc${i}`);
-      if (adcElement) {
-        adcElement.innerText = data[`ADC${i}`] || "-"; // Use "ADCx" keys from Firebase
-      }
-      // Update global variables
-      window[`adc${i}`] = data[`ADC${i}`] || null;
+      // Don’t write raw ADC into the cell. Instead, only update the global JS variable:
+      window[`adc${i}`] = data[`ADC${i}`] || 0;
     }
+
   } catch (e) {
     console.error("Error fetching RTDB data:", e);
   }

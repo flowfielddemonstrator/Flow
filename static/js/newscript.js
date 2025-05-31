@@ -7,22 +7,28 @@ const timeLabels = [];  // Stores timestamps for x-axis
 
 // Function to get the latest values from HTML table cells
 function getAdcValues() {
-    return {
-        current: [
-            0.007 * parseFloat(document.getElementById("adc0").innerText) || 0,
-            0.007 * parseFloat(document.getElementById("adc1").innerText) || 0,
-            0.007 * parseFloat(document.getElementById("adc2").innerText) || 0,
-            0.007 * parseFloat(document.getElementById("adc3").innerText) || 0,
-        ],
-        temperature: [
-            0.025 * (parseFloat(document.getElementById("adc4").innerText) || 0) + 5,
-            0.025 * (parseFloat(document.getElementById("adc5").innerText) || 0) + 5,
-            0.025 * (parseFloat(document.getElementById("adc6").innerText) || 0) + 5,
-            0.025 * (parseFloat(document.getElementById("adc7").innerText) || 0) + 5,
-        ]
-        
-    };
+    // Grab raw ADC0–3 to build “current” data (using your existing scaling factors)
+    const rawCur = [
+        window.adc0 || 0,
+        window.adc1 || 0,
+        window.adc2 || 0,
+        window.adc3 || 0
+    ];
+    // Multiply by 0.007 (your original factor)
+    const current = rawCur.map(val => 0.007 * val);
+
+    // Grab raw ADC4–7 to build “temperature” (plus offset +5)
+    const rawTemp = [
+        window.adc4 || 0,
+        window.adc5 || 0,
+        window.adc6 || 0,
+        window.adc7 || 0
+    ];
+    const temperature = rawTemp.map(val => 0.025 * val + 5);
+
+    return { current, temperature };
 }
+
 
 // Initialize the charts
 const currentCtx = document.getElementById("currentchart").getContext("2d");
