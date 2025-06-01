@@ -1,4 +1,4 @@
-const databaseUrl = "https://flow-field-demonstrator-default-rtdb.europe-west1.firebasedatabase.app/sensor.json";  // Firebase RTDB path
+const databaseUrl = "https://dashboard-9e042-default-rtdb.europe-west1.firebasedatabase.app/";  // Firebase RTDB path
 
 // Fetch sensor data from Firebase every second
 setInterval(async () => {
