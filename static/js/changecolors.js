@@ -5,16 +5,16 @@ function getAdcValues() {
     // Return the raw ADC0–ADC3 in the 0–1023 range, and ADC4–ADC7 for temperature
     return {
         current: [
-            window.adc0 || 0,
-            window.adc1 || 0,
-            window.adc2 || 0,
-            window.adc3 || 0
+            parseFloat(document.getElementById("adc0").innerText) || 0,
+            parseFloat(document.getElementById("adc1").innerText) || 0,
+            parseFloat(document.getElementById("adc2").innerText) || 0,
+            parseFloat(document.getElementById("adc3").innerText) || 0,
         ],
         temperature: [
-            window.adc4 || 0,
-            window.adc5 || 0,
-            window.adc6 || 0,
-            window.adc7 || 0
+            parseFloat(document.getElementById("adc4").innerText) || 0,
+            parseFloat(document.getElementById("adc5").innerText) || 0,
+            parseFloat(document.getElementById("adc6").innerText) || 0,
+            parseFloat(document.getElementById("adc7").innerText) || 0,
         ]
     };
 }
